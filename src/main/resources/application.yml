@@ -1,0 +1,15 @@
+api:
+  doc:
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
+
+spring:
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.StdDateFormat
+
+logging:
+  file:
+    path: ./logs
+    level: INFO
+
