@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -22,13 +23,11 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * RestExceptionHandler class:  ControlAdvice for manage the exceptions for the API
- */
 @ControllerAdvice
 public class RestExceptionHandler {
 
     private static final String EMPTY_VALUE = "<empty>";
+    private static final String UNKNOWN_VALUE = "<unknown>";
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Object> processErrorsValidation(ConstraintViolationException constraintViolationException, WebRequest request) {
@@ -52,6 +51,24 @@ public class RestExceptionHandler {
 
     }
 
+    @ExceptionHandler(HttpClientErrorException.class)
+    public ResponseEntity<Object> processHttpClientError(HttpClientErrorException exception, WebRequest request) {
+
+        var lstErrors = List.of("Message: ".concat(Optional.of(exception.getStatusText()).orElse(EMPTY_VALUE)),
+                                "Cause: ".concat(exception.getClass().getSimpleName()));
+
+        return buildErrorResponse(HttpStatus.valueOf(exception.getStatusCode().value()), lstErrors, (ServletWebRequest) request);
+    }
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> processUnHandleError(Exception exception, WebRequest request) {
+
+        var lstErrors = List.of("Message: ".concat(Optional.ofNullable(exception.getMessage()).orElse(EMPTY_VALUE)),
+                                "Cause: ".concat(Optional.ofNullable(exception.getCause()).map(Throwable::getMessage).orElse(UNKNOWN_VALUE)));
+
+        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, lstErrors, (ServletWebRequest) request);
+
+    }
+
     private static ResponseEntity<Object> buildErrorResponse(HttpStatus httpStatus, List<String> lstErrors, ServletWebRequest request) {
         HttpServletRequest servletRequest = request.getRequest();
         var errorResponse = Error.builder().timestamp(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME))
@@ -60,6 +77,13 @@ public class RestExceptionHandler {
                 .errors(lstErrors)
                 .build();
         return ResponseEntity.status(httpStatus).body(errorResponse);
+    }
+
+    @ExceptionHandler(value = {RecordNotFoundException.class})
+    public ResponseEntity<Object> handleNotFound(RuntimeException exception, WebRequest request) {
+        var lstErrors = List.of("Message: ".concat(Optional.ofNullable(exception.getMessage()).orElse(EMPTY_VALUE)),
+                "Cause: ".concat(Optional.ofNullable(exception.getCause()).map(Throwable::getMessage).orElse(UNKNOWN_VALUE)));
+        return buildErrorResponse(HttpStatus.NOT_FOUND, lstErrors, (ServletWebRequest) request);
     }
 
     @Builder
