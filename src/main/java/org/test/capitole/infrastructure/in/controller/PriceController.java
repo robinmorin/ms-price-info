@@ -16,22 +16,24 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.test.capitole.domain.ports.in.SearchPriceInputPort;
 import org.test.capitole.infrastructure.in.dto.PriceResponse;
+import org.test.capitole.infrastructure.in.exception.RecordNotFoundException;
 import org.test.capitole.infrastructure.in.exception.RestExceptionHandler;
+import org.test.capitole.infrastructure.in.mapper.PriceResponseMapper;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-/**
- * PriceController class: Controller for expose the endpoint to request price for a product by brand and date.
- */
 @Slf4j
-@Tag(name = "Prices", description = "Controller for Prices Product Info")
+@Tag(name = "Prices", description = "Controller for Prices Product Operations")
 @RestController
 @Validated
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/products")
 public class PriceController {
+
+    private final SearchPriceInputPort searchPriceInputPort;
+    private final PriceResponseMapper priceResponseMapper;
 
     @Operation(summary = "Request price product by brand that could be apply in specific date")
     @ApiResponses(value = {
@@ -58,18 +60,11 @@ public class PriceController {
                                                   LocalDateTime effectiveDate){
 
         log.info("Requesting price for Product: {} Brand: {} EffectiveDate: {}", productId, brandId, effectiveDate);
-        var priceResponseMock = PriceResponse.builder()
-                                            .productId(productId)
-                                            .brandId(brandId)
-                                            .priceListId(2)
-                                            .effectiveDateRange(PriceResponse.EffectiveDateRange.builder()
-                                                                                                  .from(effectiveDate.minusDays(2))
-                                                                                                  .to(effectiveDate.plusDays(1))
-                                                                                                  .build())
-                                            .priceToApply(BigDecimal.valueOf(25.45))
-                                            .build();
-        log.info("Returning price found - Price List: {}, Value: {}, EffectiveDateRange: {}", priceResponseMock.getPriceListId(), priceResponseMock.getPriceToApply(), priceResponseMock.getEffectiveDateRange());
-        return ResponseEntity.ok(priceResponseMock);
+        var response = searchPriceInputPort.searchByMostPriority(productId, brandId, effectiveDate)
+                                   .map(priceResponseMapper::toResponse)
+                                .orElseThrow(()-> new RecordNotFoundException("Price not found with the given parameters"));
+        log.info("Returning price found - Price List: {}, Value: {}, EffectiveDateRange: {}", response.getPriceListId(), response.getPriceToApply(), response.getEffectiveDateRange());
+        return ResponseEntity.ok(response);
     }
 
 }
