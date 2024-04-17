@@ -29,10 +29,6 @@ public class PriceResponse {
     @JsonFormat(shape = JsonFormat.Shape.NUMBER, pattern = "#0.00")
     private BigDecimal priceToApply;
 
-    public BigDecimal getPriceToApply() {
-        return priceToApply.setScale(2);
-    }
-
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor

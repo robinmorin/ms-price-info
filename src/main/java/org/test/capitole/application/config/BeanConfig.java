@@ -1,4 +1,4 @@
-package org.test.capitole.application;
+package org.test.capitole.application.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,7 @@ import org.test.capitole.domain.usecase.SearchPriceUseCase;
 
 /***
  * Configuration class for the beans of the application for classes that couldn't be
- * annotated with Spring annotations for layer business protection
+ * annotated with Spring annotations for layer domain protection
  */
 @Configuration
 public class BeanConfig {

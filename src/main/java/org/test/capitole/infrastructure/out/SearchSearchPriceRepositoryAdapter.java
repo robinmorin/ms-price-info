@@ -14,7 +14,7 @@ import java.util.Optional;
 
 
 /**
- * PriceRepositoryGateway class : Represents the adapter that uses the PriceRepository to search for prices in the database.
+ * SearchSearchPriceRepositoryAdapter class : Represents the adapter that uses the PriceRepository to search for prices in the database.
  */
 @Slf4j
 @RequiredArgsConstructor

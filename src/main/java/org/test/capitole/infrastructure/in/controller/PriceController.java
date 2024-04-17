@@ -62,7 +62,7 @@ public class PriceController {
         log.info("Requesting price for Product: {} Brand: {} EffectiveDate: {}", productId, brandId, effectiveDate);
         var response = searchPriceInputPort.searchByMostPriority(productId, brandId, effectiveDate)
                                    .map(priceResponseMapper::toResponse)
-                                .orElseThrow(()-> new RecordNotFoundException("Price not found with the given parameters"));
+                                   .orElseThrow(()-> new RecordNotFoundException("Price not found with the given parameters"));
         log.info("Returning price found - Price List: {}, Value: {}, EffectiveDateRange: {}", response.getPriceListId(), response.getPriceToApply(), response.getEffectiveDateRange());
         return ResponseEntity.ok(response);
     }

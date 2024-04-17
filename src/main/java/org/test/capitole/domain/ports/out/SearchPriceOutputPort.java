@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
- * Gateway (port) for connect to repository for search prices
+ * Port for get result price from repository search
  */
 public interface SearchPriceOutputPort {
      Optional<PriceModel> searchByMostPriority(Long productId, Integer brandId, LocalDateTime effectiveDate);
