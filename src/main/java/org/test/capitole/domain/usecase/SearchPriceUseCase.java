@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
- * This class is the interactor that interact with the gateway (port) to search the price by most priority
+ * This class is the use case that interact with the ports to search the price by most priority
  */
 public class SearchPriceUseCase implements SearchPriceInputPort {
 

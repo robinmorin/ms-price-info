@@ -1,4 +1,4 @@
-package org.test.capitole.infrastructure.in.dto;
+package org.test.capitole.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,10 +28,6 @@ public class PriceResponse {
     @Schema(name = "priceToApply", description = "Price to Apply", example = "25.45")
     @JsonFormat(shape = JsonFormat.Shape.NUMBER, pattern = "#0.00")
     private BigDecimal priceToApply;
-
-    public BigDecimal getPriceToApply() {
-        return priceToApply.setScale(2);
-    }
 
     @Builder
     @AllArgsConstructor

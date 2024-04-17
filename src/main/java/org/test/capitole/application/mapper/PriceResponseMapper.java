@@ -1,9 +1,9 @@
-package org.test.capitole.infrastructure.in.mapper;
+package org.test.capitole.application.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.test.capitole.application.dto.PriceResponse;
 import org.test.capitole.domain.model.PriceModel;
-import org.test.capitole.infrastructure.in.dto.PriceResponse;
 
 
 /**

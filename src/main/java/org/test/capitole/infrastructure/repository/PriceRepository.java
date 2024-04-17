@@ -1,11 +1,11 @@
-package org.test.capitole.infrastructure.out.repository;
+package org.test.capitole.infrastructure.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.test.capitole.infrastructure.out.repository.entity.Price;
-import org.test.capitole.infrastructure.out.repository.entity.PricePK;
+import org.test.capitole.infrastructure.repository.entity.Price;
+import org.test.capitole.infrastructure.repository.entity.PricePK;
 
 import java.time.LocalDateTime;
 import java.util.List;

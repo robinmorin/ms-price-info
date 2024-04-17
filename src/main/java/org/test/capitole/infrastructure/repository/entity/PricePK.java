@@ -1,4 +1,4 @@
-package org.test.capitole.infrastructure.out.repository.entity;
+package org.test.capitole.infrastructure.repository.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
