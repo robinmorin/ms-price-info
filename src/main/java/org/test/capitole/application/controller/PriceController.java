@@ -1,4 +1,4 @@
-package org.test.capitole.infrastructure.in.controller;
+package org.test.capitole.application.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -16,11 +16,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.test.capitole.application.dto.PriceResponse;
+import org.test.capitole.application.exception.RecordNotFoundException;
+import org.test.capitole.application.exception.RestExceptionHandler;
+import org.test.capitole.application.mapper.PriceResponseMapper;
 import org.test.capitole.domain.ports.in.SearchPriceInputPort;
-import org.test.capitole.infrastructure.in.dto.PriceResponse;
-import org.test.capitole.infrastructure.in.exception.RecordNotFoundException;
-import org.test.capitole.infrastructure.in.exception.RestExceptionHandler;
-import org.test.capitole.infrastructure.in.mapper.PriceResponseMapper;
 
 import java.time.LocalDateTime;
 

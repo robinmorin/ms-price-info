@@ -1,12 +1,12 @@
-package org.test.capitole.infrastructure.out;
+package org.test.capitole.infrastructure;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.test.capitole.domain.model.PriceModel;
 import org.test.capitole.domain.ports.out.SearchPriceOutputPort;
-import org.test.capitole.infrastructure.out.repository.PriceRepository;
-import org.test.capitole.infrastructure.out.repository.mapper.PriceEntityMapper;
+import org.test.capitole.infrastructure.repository.PriceRepository;
+import org.test.capitole.infrastructure.repository.mapper.PriceEntityMapper;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -20,7 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Component
 @SuppressWarnings("java:S3864")
-public class SearchSearchPriceRepositoryAdapter implements SearchPriceOutputPort {
+public class SearchPriceRepositoryAdapter implements SearchPriceOutputPort {
 
     private final PriceRepository priceRepository;
     private final PriceEntityMapper priceEntityMapper;

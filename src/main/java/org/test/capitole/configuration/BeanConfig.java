@@ -1,4 +1,4 @@
-package org.test.capitole.application.config;
+package org.test.capitole.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

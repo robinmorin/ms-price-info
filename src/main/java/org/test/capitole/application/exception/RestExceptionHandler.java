@@ -1,4 +1,4 @@
-package org.test.capitole.infrastructure.in.exception;
+package org.test.capitole.application.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;

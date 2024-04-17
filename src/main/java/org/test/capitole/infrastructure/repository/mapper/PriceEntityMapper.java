@@ -1,9 +1,9 @@
-package org.test.capitole.infrastructure.out.repository.mapper;
+package org.test.capitole.infrastructure.repository.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.test.capitole.domain.model.PriceModel;
-import org.test.capitole.infrastructure.out.repository.entity.Price;
+import org.test.capitole.infrastructure.repository.entity.Price;
 
 /**
  * PriceMapper class : Mapper to convert domain object PriceDomain to entity object Price
