@@ -17,6 +17,7 @@
         <java.version>17</java.version>
         <lombok.version>1.18.30</lombok.version>
         <mapstruct.version>1.6.0.Beta1</mapstruct.version>
+        <jacoco.reportPath>${project.basedir}/../target/jacoco.exec</jacoco.reportPath>
     </properties>
     <dependencies>
         <dependency>
@@ -95,6 +96,25 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.10</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+             </plugin>
         </plugins>
     </build>
 </project>
