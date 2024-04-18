@@ -11,7 +11,9 @@ import java.time.LocalDateTime;
 /**
  * PriceResponse class: Represent the presentation object to return price for the API.
  */
-@Data
+@Getter
+@Setter
+@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

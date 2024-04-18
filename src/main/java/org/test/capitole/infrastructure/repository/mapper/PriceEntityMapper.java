@@ -17,6 +17,7 @@ public interface PriceEntityMapper {
     @Mapping(target = "vPrice", source = "price", numberFormat = "$#.00")
     @Mapping(target = "startDate", source = "effectiveDates.startDate")
     @Mapping(target = "endDate", source = "effectiveDates.endDate")
+    @Mapping(target = "currency.currencyIso", source = "currencyIso")
     Price toEntity(PriceModel priceModel);
 
     @Mapping(target = "productId", source = "pricePK.product.productId")
@@ -25,6 +26,7 @@ public interface PriceEntityMapper {
     @Mapping(target = "price", source = "VPrice", numberFormat = "$#.00")
     @Mapping(target = "effectiveDates.startDate", source = "startDate")
     @Mapping(target = "effectiveDates.endDate", source = "endDate")
+    @Mapping(target = "currencyIso", source = "currency.currencyIso")
     PriceModel toDomain(Price price);
 
 }
